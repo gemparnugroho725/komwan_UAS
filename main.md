@@ -10,7 +10,10 @@ Build aplikasi dengan perintah `docker build`:
 docker build -t triandri/tasksapp-rks:1.0
 ```
 
-Aplikasi juga dapat diunduh dari Docker Hub dengan perintah `docker pull`.
+Aplikasi juga dapat diunduh dari Docker Hub dengan perintah `docker pull`. START di App aja
+```sh
+docker pull triandri/tasksapp-rks:1.0
+```
 
 ### Run & Test
 
