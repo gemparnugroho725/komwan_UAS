@@ -429,5 +429,81 @@ VPA menyesuaikan sumber daya (CPU dan memori) yang dialokasikan ke pod secara ot
 
 ---
 
-Kalau kamu ingin, saya bisa bantu buatkan file YAML konfigurasi HPA dan VPA juga, atau contoh script testing-nya. Mau?
+# 📌 Manual Setting Resource Pod dengan `kubectl patch`
 
+Ganti `tasksapp` dengan nama deployment kamu, dan sesuaikan nama container di patch jika berbeda.
+
+```bash
+kubectl patch deployment tasksapp --patch '{
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [{
+          "name": "tasksapp-container",
+          "resources": {
+            "requests": {
+              "cpu": "250m",
+              "memory": "256Mi"
+            },
+            "limits": {
+              "cpu": "500m",
+              "memory": "512Mi"
+            }
+          }
+        }]
+      }
+    }
+  }
+}'
+```
+
+---
+
+# 📌 Deploy Vertical Pod Autoscaler (VPA) via `kubectl apply` dengan heredoc
+
+Pastikan **VPA sudah terinstall** di cluster kamu (cek dengan `kubectl get pods -n kube-system | grep vpa`).
+
+Jalankan perintah berikut untuk membuat VPA:
+
+```bash
+cat <<EOF | kubectl apply -f -
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: tasksapp-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: Deployment
+    name: tasksapp
+  updatePolicy:
+    updateMode: "Auto"
+EOF
+```
+
+---
+
+# 📌 Cek hasil konfigurasi
+
+1. Cek resource di deployment:
+
+```bash
+kubectl get deployment tasksapp -o yaml | grep -A10 resources
+```
+
+2. Cek status VPA:
+
+```bash
+kubectl describe vpa tasksapp-vpa
+```
+
+---
+
+# 📌 Penjelasan singkat
+
+| Setting      | Fungsi                                   |
+| ------------ | ---------------------------------------- |
+| Manual patch | Set resource requests dan limits statis  |
+| VPA          | Otomatis sesuaikan resource sesuai beban |
+
+---
