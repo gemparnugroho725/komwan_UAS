@@ -1,5 +1,3 @@
-Berikut adalah **step by step install Minishift 1.24 di Windows (VirtualBox sebagai hypervisor)** sampai OpenShift berjalan:
-
 ---
 
 ## ✅ **1. Persiapan & Kebutuhan Sistem**
@@ -173,6 +171,9 @@ Login pakai:
 * **Username**: `developer` (untuk normal user) atau `system:admin`
 * **Password**: `any` (bebas, misalnya `admin`)
 
+Default biasanya
+* **Username**: `docker` 
+* **Password**: `tcuser` 
 ---
 
 ### ⚠ **Jika Masih Gagal OpenShift Running**
@@ -181,9 +182,3 @@ Biasanya masalahnya di DNS atau image OpenShift tidak berhasil ter-pull.
 Kita bisa pull manual image lewat SSH.
 
 ---
-
-❓ **Mau saya bikinin juga step khusus untuk:**
-
-1. **Set PATH `oc` permanen di Windows**, atau
-2. **Cara manual pull image OpenShift supaya OpenShift langsung Running?**
-   Mau lanjut yang mana dulu?
