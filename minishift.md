@@ -1,3 +1,5 @@
+Berikut adalah **step by step install Minishift 1.24 di Windows (VirtualBox sebagai hypervisor)** sampai OpenShift berjalan:
+
 ---
 
 ## ✅ **1. Persiapan & Kebutuhan Sistem**
