@@ -139,6 +139,8 @@ Atau hapus semua pods, services, dan deployment di namespace default:
 kubectl delete pods --all
 kubectl delete svc --all
 kubectl delete deployment --all
+
+ini resistant
 ```
 
 ---
